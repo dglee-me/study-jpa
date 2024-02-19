@@ -6,6 +6,8 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.persistence.Transient;
@@ -15,9 +17,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -56,6 +60,10 @@ public class Member {
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime createdDate;
+
+	@ManyToOne
+	@JoinColumn(name = "TEAM_ID")
+	private Team team;
 
 	/**
 	 * 이 필드는 Entity에 존재하지 않는 임시 필드이다. 즉, DB에 매핑되지 않는다.
