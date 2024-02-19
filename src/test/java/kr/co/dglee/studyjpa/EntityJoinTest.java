@@ -12,7 +12,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles("test")
+@TestConfiguration("classpath:application-test.yml")
 @SpringBootTest
 class EntityJoinTest {
 
@@ -21,6 +26,7 @@ class EntityJoinTest {
 
 	@Test
 	@DisplayName("회원에게 팀을 추가한다.")
+	@Rollback(false)	// 테스트 종료 후 롤백하지 않음 (테스트 DB이므로 실제 DB에 영향을 주지 않음)
 	@Transactional
 	void userTeamAddTest() {
 		// 개발팀 저장
@@ -58,6 +64,7 @@ class EntityJoinTest {
 
 	@Test
 	@DisplayName("회원의 팀을 변경한다.")
+	@Rollback(false)	// 테스트 종료 후 롤백하지 않음 (테스트 DB이므로 실제 DB에 영향을 주지 않음)
 	@Transactional
 	void changeUserTeamTest() {
 		// 개발팀 저장
@@ -93,6 +100,7 @@ class EntityJoinTest {
 
 	@Test
 	@DisplayName("회원이 속한 팀을 삭제한다.")
+	@Rollback(false)	// 테스트 종료 후 롤백하지 않음 (테스트 DB이므로 실제 DB에 영향을 주지 않음)
 	@Transactional
 	void userTeamDeleteTest() {
 		// 개발팀 저장
