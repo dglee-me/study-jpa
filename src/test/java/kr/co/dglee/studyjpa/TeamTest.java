@@ -27,21 +27,36 @@ class TeamTest {
 	@DisplayName("팀에 속한 회원 조회 테스트")
 	@Transactional
 	@Rollback(false)
-		// 테스트 종료 후 롤백하지 않음 (테스트 DB이므로 실제 DB에 영향을 주지 않음)
 	void teamMemberSelectTest() {
 
-		Team devTeam = Team.builder().name("개발팀").build();
+		Team devTeam = Team.builder()
+						   .name("개발팀")
+						   .build();
 		entityManager.persist(devTeam);
 
-		Team designTeam = Team.builder().name("디자인팀").build();
+		Team designTeam = Team.builder()
+							  .name("디자인팀")
+							  .build();
 		entityManager.persist(designTeam);
 
 		// 회원 저장 ( 개발팀에 속함 )
-		Member member = Member.builder().name("이동근").email("practice@gmail.com").age(32).role(Role.ADMIN).team(devTeam).build();
+		Member member = Member.builder()
+							  .name("이동근")
+							  .email("practice@gmail.com")
+							  .age(32)
+							  .role(Role.ADMIN)
+							  .team(devTeam)
+							  .build();
 		entityManager.persist(member);
 
 		// 회원 저장 ( 개발팀에 속함 )
-		Member member2 = Member.builder().name("삼동근").email("practice2@gmail.com").age(32).role(Role.USER).team(devTeam).build();
+		Member member2 = Member.builder()
+							   .name("삼동근")
+							   .email("practice2@gmail.com")
+							   .age(32)
+							   .role(Role.USER)
+							   .team(devTeam)
+							   .build();
 		entityManager.persist(member2);
 
 		// 영속성 컨텍스트 초기화 (devTeam을 준영속 상태로 만들어야 DB에서 재조회가 가능)
